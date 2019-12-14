@@ -21,7 +21,7 @@ const getters = {
 };
 
 const actions = {
-  async fetchImages({ commit, state }) {
+  async fetchImages({ commit, state }, replace) {
     const { section, sort, page, window, showViral } = state;
     commit("setIsLoading", true);
     const { data } = await axios.get(
@@ -34,7 +34,11 @@ const actions = {
         }
       }
     );
-    commit("setImages", data.data);
+    if (replace) {
+      commit("setImages", data.data);
+    } else {
+      commit("addImages", data.data);
+    }
     commit("setIsLoading", false);
     commit("incrementPage");
   },
@@ -52,14 +56,42 @@ const actions = {
   },
   incrementPage({ commit }) {
     commit("incrementPage");
+  },
+  setSection({ commit, dispatch }, payload) {
+    commit("setSection", payload);
+    commit("resetPage");
+    dispatch("fetchImages", true);
+  },
+  setShowViral({ commit, dispatch }, payload) {
+    commit("setShowViral", payload);
+    commit("resetPage");
+    dispatch("fetchImages", true);
+  },
+  setSort({ commit, dispatch }, payload) {
+    commit("setSort", payload);
+    commit("resetPage");
+    dispatch("fetchImages", true);
+  },
+  setWindow({ commit, dispatch }, payload) {
+    commit("setWindow", payload);
+    commit("resetPage");
+    dispatch("fetchImages", true);
   }
 };
 
 const mutations = {
-  setImages: (state, data) => (state.data = [...state.data, ...data]),
+  setImages: (state, data) => (state.data = data),
+  addImages: (state, data) => (state.data = data),
   setImage: (state, record) => (state.record = record),
+
+  setSection: (state, section) => (state.section = section),
+  setShowViral: (state, showViral) => (state.showViral = showViral),
+  setSort: (state, sort) => (state.sort = sort),
+  setWindow: (state, window) => (state.window = window),
+  
   setImageType: (state, type) => (state.type = type),
   incrementPage: state => (state.page = state.page + 1),
+  resetPage: state => (state.page = 0),
   setIsLoading: (state, isLoading) => (state.isLoading = isLoading)
 };
 

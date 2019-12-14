@@ -3,11 +3,15 @@
     <div v-if="getIsLoading" class="loader">
       LOADING...
     </div>
+    <div class="section-picker">
+      <Button @click="setSection('hot')">Hot</Button>
+      <Button @click="setSection('top')">Top</Button>
+      <Button @click="setSection('user')">User</Button>
+    </div>
     <stack
       :column-min-width="240"
       :gutter-width="15"
       :gutter-height="15"
-      monitor-images-loaded
       v-if="getPosts.length > 0"
     >
       <stack-item
@@ -15,9 +19,11 @@
         :key="i"
         style="transition: transform 300ms"
       >
-        <router-link :to="'/post/'+ (post.is_album ? 'album' : 'image') +'/' + post.id">
+        <router-link
+          :to="'/post/' + (post.is_album ? 'album' : 'image') + '/' + post.id"
+        >
           <div class="wrapper">
-            <div class="content">
+            <div class="content" v-bind:style="{ height: 240 / (post.cover_width/post.cover_height) + 'px' }">
               <template v-if="post.is_album">
                 <template v-for="image in post.images">
                   <img v-if="!image.mp4" :src="image.link" :key="image.link" />
@@ -50,20 +56,25 @@
 
 <script>
 import { Stack, StackItem } from "vue-stack-grid";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Trigger from "../components/Trigger";
+import Button from "../components/Button";
 
 export default {
   name: "Home",
   components: {
     Stack,
     StackItem,
-    Trigger
+    Trigger,
+    Button
   },
   data: () => ({
     images: []
   }),
-  computed: mapGetters(["getPosts", "getIsLoading"])
+  computed: mapGetters(["getPosts", "getIsLoading"]),
+  methods: {
+    ...mapActions(["setSection", "setShowViral", "setSort", "setWindow"])
+  }
 };
 </script>
 <style>
@@ -114,6 +125,7 @@ img {
 
 body {
   background-color: #01b96b;
+  margin: 0;
 }
 
 .wrapper {
@@ -130,7 +142,7 @@ body {
 }
 
 .content {
-  max-height: 427px;
+  min-height: 240px;
   overflow: hidden;
 }
 .loader {
@@ -150,7 +162,12 @@ body {
   opacity: 0.8;
 }
 
-a {
-    text-decoration: none;
+.section-picker {
+  padding: 15px 0;
+  display: flex;
+}
+
+.section-picker button {
+  flex: 1;
 }
 </style>
