@@ -28,9 +28,6 @@ export default {
     SectionPicker,
     Trigger
   },
-  data: () => ({
-    images: []
-  }),
   computed: mapGetters(["getPosts", "getIsLoading"]),
 };
 </script>
@@ -51,5 +48,9 @@ export default {
   z-index: 2;
   background: #01b96b;
   opacity: 0.8;
+}
+
+.grid {
+  margin: 15px 10px 15px 0 !important;
 }
 </style>

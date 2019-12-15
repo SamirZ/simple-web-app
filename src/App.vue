@@ -21,13 +21,6 @@ export default {
   font-family: "ABeeZee", sans-serif;
 }
 
-.grid-item {
-  width: 300px;
-}
-.grid-item--width2 {
-  width: 400px;
-}
-
 body {
   background-color: #01b96b;
   margin: 0;
@@ -35,21 +28,6 @@ body {
 img,
 video {
   width: 100%;
-}
-.card {
-  background-color: #474a51;
-  position: relative;
-  margin: 0 5px 15px;
-  padding: 10px;
-  border-radius: 10px;
-  transition: all 0.25s ease-in-out;
-}
-
-@media only screen and (min-width: 1000px) {
-  .card:hover {
-    transform: scaleX(1.02);
-    box-shadow: 0 0 12px black;
-  }
 }
 
 a {
@@ -62,15 +40,4 @@ a:hover {
   text-decoration: none;
 }
 
-.grid {
-  margin: 15px 10px 15px 0 !important;
-}
-
-.card-body {
-  padding: 4px;
-}
-.card-title {
-  text-align: center;
-  margin: 1rem 1.25rem 1.25rem;
-}
 </style>

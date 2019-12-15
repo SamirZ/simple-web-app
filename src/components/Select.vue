@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <label>{{ name }}:</label>
-    <select v-model="value" v-on:change="$emit('change', $event.target.value)" class="select-css">
+  <div class="select-input">
+    <label class="select-input__label">{{ name }}:</label>
+    <select
+      class="select-input__select"
+      :value="value"
+      v-on:change="$emit('change', $event.target.value)"
+    >
       <slot></slot>
     </select>
   </div>
@@ -10,15 +14,22 @@
 <script>
 export default {
   name: "Select",
-  props: ["name", "value"]
+  props: {
+    name: {
+      type: String
+    },
+    value: {
+    }
+  }
 };
 </script>
+
 <style lang="scss" scoped>
-div {
+.select-input {
   display: inline-block;
 }
 
-label {
+.select-input__label {
   text-transform: capitalize;
   font-weight: bold;
   font-size: 2rem;
@@ -26,7 +37,7 @@ label {
   background: #474a51;
   padding: 3px 8px;
 }
-select {
+.select-input__select {
   cursor: pointer;
   font-size: 16px;
   font-family: sans-serif;
@@ -51,18 +62,15 @@ select {
   background-position: right 0.7em top 50%, 0 0;
   background-size: 0.65em auto, 100%;
 }
-select::-ms-expand {
+.select-input__select::-ms-expand {
   display: none;
 }
-select:hover {
+.select-input__select:hover {
   border-color: #474a51;
 }
-select:focus {
+.select-input__select:focus {
   border-color: #474a51;
   color: #474a51;
   outline: none;
-}
-select option {
-  font-weight: bold;
 }
 </style>

@@ -16,6 +16,10 @@ export default {
   components: {
     VLazyImage
   },
-  props: ["media"],
+  props: {
+    media: {
+      type: Object
+    }
+  },
 };
 </script>

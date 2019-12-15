@@ -1,5 +1,5 @@
 <template>
-  <div ref="trigger"/>
+  <div class="trigger" ref="trigger"/>
 </template>
 
 <script>
@@ -47,7 +47,7 @@ export default {
 </script>
 
 <style scoped>
-  div{ 
+  .trigger { 
     border-top: 1px solid #474a51;
     height: 10px;
     width: 100%;

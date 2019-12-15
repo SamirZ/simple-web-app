@@ -6,7 +6,7 @@
     </h2>
     <h4 v-if="post.description" class="description">{{ post.description }}</h4>
 
-    <Ratings :post="post" />
+    <Statistics :post="post" />
 
     <template v-if="post.is_album">
       <MediaContent
@@ -23,14 +23,14 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import MediaContent from "../components/MediaContent";
-import Ratings from "../components/Ratings";
+import Statistics from "../components/Statistics";
 import NavigateBack from "../components/NavigateBack";
 
 export default {
   name: "Post",
   components: {
     MediaContent,
-    Ratings,
+    Statistics,
     NavigateBack
   },
   methods: {

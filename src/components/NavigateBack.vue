@@ -1,13 +1,17 @@
 <template>
   <div class="back">
-    <img v-on:click="goBack" class="back-image" src="../assets/arrow-left-solid.svg" />
+    <img v-on:click="goBack" class="back__image" src="../assets/arrow-left-solid.svg" />
   </div>
 </template>
 
 <script>
 export default {
   name: "NavigateBack",
-  props: ["text"],
+  props: {
+    text: {
+      type: String
+    }
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
@@ -24,7 +28,7 @@ export default {
   align-items: center;
   cursor: pointer;
 }
-.back-image {
+.back__image {
   width: 20px !important;
   height: 20px !important;
   padding: 10px;
