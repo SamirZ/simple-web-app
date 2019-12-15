@@ -61,4 +61,12 @@ Select
     align-items: center;
   }
 }
+
+@media only screen and (max-width: 700px) {
+  .section-picker {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
 </style>
