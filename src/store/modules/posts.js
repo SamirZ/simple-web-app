@@ -9,7 +9,7 @@ const state = {
   page: 0, // integer - the data paging number
   section: "hot", // hot | top | user - defaults to hot
   showViral: true, // true | false - Show or hide viral images from the 'user' section. Defaults to true
-  sort: "time", // viral | top | time | rising (only available with user section) - defaults to viral
+  sort: "viral", // viral | top | time | rising (only available with user section) - defaults to viral
   window: "day" //	Change the date range of the request if the section is "top", day | week | month | year | all, defaults to day
 };
 
@@ -17,7 +17,11 @@ const getters = {
   getPosts: state => state.data,
   post: state => state.record,
   type: state => state.type,
-  getIsLoading: state => state.isLoading
+  getIsLoading: state => state.isLoading,
+  includeViral: state => state.showViral,
+  section: state => state.section,
+  sort: state => state.sort,
+  window: state => state.window,
 };
 
 const actions = {
@@ -26,7 +30,7 @@ const actions = {
     commit("setIsLoading", true);
     const { data } = await axios.get(
       `https://api.imgur.com/3/gallery/${section}/${sort}/${window}/${page}${
-        showViral ? "?showViral=true" : ""
+        showViral ? "" : "?showViral=false"
       }`,
       {
         headers: {
@@ -59,39 +63,34 @@ const actions = {
   },
   setSection({ commit, dispatch }, payload) {
     commit("setSection", payload);
-    commit("resetPage");
     dispatch("fetchImages", true);
   },
   setShowViral({ commit, dispatch }, payload) {
     commit("setShowViral", payload);
-    commit("resetPage");
     dispatch("fetchImages", true);
   },
   setSort({ commit, dispatch }, payload) {
     commit("setSort", payload);
-    commit("resetPage");
     dispatch("fetchImages", true);
   },
   setWindow({ commit, dispatch }, payload) {
     commit("setWindow", payload);
-    commit("resetPage");
     dispatch("fetchImages", true);
   }
 };
 
 const mutations = {
-  setImages: (state, data) => (state.data = data),
-  addImages: (state, data) => (state.data = data),
+  setImages: (state, data) => (state.data = data, state.page = 0),
+  addImages: (state, data) => (state.data = [...state.data, ...data]),
   setImage: (state, record) => (state.record = record),
 
-  setSection: (state, section) => (state.section = section),
-  setShowViral: (state, showViral) => (state.showViral = showViral),
-  setSort: (state, sort) => (state.sort = sort),
-  setWindow: (state, window) => (state.window = window),
+  setSection: (state, section) => (state.section = section, state.page = 0, state.sort = "viral", state.window.day),
+  setShowViral: (state, showViral) => (state.showViral = showViral, state.page = 0),
+  setSort: (state, sort) => (state.sort = sort, state.page = 0),
+  setWindow: (state, window) => (state.window = window, state.page = 0),
   
   setImageType: (state, type) => (state.type = type),
   incrementPage: state => (state.page = state.page + 1),
-  resetPage: state => (state.page = 0),
   setIsLoading: (state, isLoading) => (state.isLoading = isLoading)
 };
 

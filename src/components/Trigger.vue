@@ -1,5 +1,5 @@
 <template>
-  <span ref="trigger"/>
+  <div ref="trigger"/>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       observer: null
-    }
+    };
   },
 
   mounted() {
@@ -45,3 +45,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+  div{ 
+    border-top: 1px solid #474a51;
+    height: 10px;
+    width: 100%;
+  }
+</style>

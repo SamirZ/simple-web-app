@@ -17,5 +17,8 @@ export default {
   }
   a {
     color: white;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 18px;
   }
 </style>
