@@ -1,6 +1,5 @@
 <template>
   <div class="select-input">
-    <label class="select-input__label">{{ name }}:</label>
     <select
       class="select-input__select"
       :value="value"
@@ -26,51 +25,59 @@ export default {
 
 <style lang="scss" scoped>
 .select-input {
-  display: inline-block;
-}
-
-.select-input__label {
-  text-transform: capitalize;
-  font-weight: bold;
-  font-size: 2rem;
-  color: #fff;
+  position: relative;
+  display: flex;
+  width: 20rem;
+  height: 52px;
+  margin: 5px 10px;
+  line-height: 3;
   background: #474a51;
-  padding: 3px 8px;
+  overflow: hidden;
+  border-radius: .25rem;
+}
+@media only screen and (max-width: 700px) {
+  .select-input {
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
 }
 .select-input__select {
-  cursor: pointer;
-  font-size: 16px;
-  font-family: sans-serif;
-  font-weight: 700;
-  height: 43px;
-  color: #474a51;
-  line-height: 1.3;
-  padding: 0.6em 1.4em 0.5em 0.8em;
-  min-width: 60px;
-  max-width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  border: 1px solid #fff;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-  -moz-appearance: none;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
   appearance: none;
-  background-color: #fff;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"),
-    linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
-  background-repeat: no-repeat, repeat;
-  background-position: right 0.7em top 50%, 0 0;
-  background-size: 0.65em auto, 100%;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #474a51;
+  background-image: none;
+  flex: 1;
+  padding: 0 1rem;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
 }
+/* Remove IE arrow */
 .select-input__select::-ms-expand {
   display: none;
 }
-.select-input__select:hover {
-  border-color: #474a51;
+/* Arrow */
+.select-input::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1rem;
+  color: #fff;
+  background: #474a51;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
 }
-.select-input__select:focus {
-  border-color: #474a51;
-  color: #474a51;
-  outline: none;
+/* Arrow Transition */
+.select-input:hover::after {
+  color: #01b96b;
 }
 </style>

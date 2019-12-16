@@ -1,24 +1,32 @@
 <template>
   <div class="navbar">
-    <router-link :to="'/'">Home</router-link>
+    <router-link class="navbar__link" :to="'/'">Simple Web App</router-link>
+    <Imgur />
   </div>
 </template>
 
 <script>
+import Imgur from './Imgur';
+
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  components: {
+    Imgur
+  }
 };
 </script>
 
 <style scoped>
   .navbar {
-    padding: 15px 0;
     background: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  a {
-    color: white;
+  .navbar__link {
+    color: #fff;
     padding: 15px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
   }
 </style>

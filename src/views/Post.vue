@@ -1,6 +1,6 @@
 <template>
   <div class="post">
-    <h2 v-if="post.title" class="title">
+    <h2 v-if="post" class="title">
       <NavigateBack />
       <span>{{ post.title }}</span>
     </h2>

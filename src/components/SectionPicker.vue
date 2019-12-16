@@ -67,22 +67,19 @@ export default {
 <style lang="scss" scoped>
 .section-picker {
   display: flex;
-  justify-content: center;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
   min-height: 60px;
   .section-picker__select {
-    flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 }
-
 @media only screen and (max-width: 700px) {
   .section-picker {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 }
 </style>
