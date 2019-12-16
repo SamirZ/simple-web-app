@@ -22,7 +22,7 @@ export default {
 }
 
 body {
-  background-color: #01b96b;
+  background: linear-gradient(to right, rgb(1, 185, 107) 0%, rgba(1,145,147,1) 100%);
   margin: 0;
 }
 img,
